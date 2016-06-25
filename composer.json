@@ -4,7 +4,7 @@
     "homepage": "https://github.com/dreamproduction/google_places_api",
     "require": {
         "fig/cache-util": "^1.0@dev",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.0"
     },
     "license": "GPL-2.0+",
     "authors": [
