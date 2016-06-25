@@ -1,0 +1,26 @@
+{
+    "name": "dreamproduction/google_places_api",
+    "description": "Php library for getting data from the Google Places API.",
+    "homepage": "https://github.com/dreamproduction/google_places_api",
+    "require": {
+        "fig/cache-util": "^1.0@dev",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Calin Marian",
+            "email": "calin.marian@dreamproduction.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dreamproduction/google_places_api/issues",
+        "source": "https://github.com/dreamproduction/google_places_api"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dreamproduction\\GooglePlacesAPI\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
