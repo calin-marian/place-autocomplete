@@ -1,12 +1,12 @@
 <?php
 
-namespace Dreamproduction\GooglePlacesAPI\Query;
+namespace Dreamproduction\GooglePlacesAPI\Request;
 
 /**
- * Contains Dreamproduction\GooglePlacesAPI\Query\QueryInterface.
+ * Contains Dreamproduction\GooglePlacesAPI\Request\RequestInterface.
  */
 
-interface QueryInterface {
+interface RequestInterface {
 
   /**
    * Performs the search on the Places API.
