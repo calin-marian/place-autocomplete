@@ -11,6 +11,7 @@ use GooglePlacesAPIAutocomplete\Exception\RequestException;
 use GooglePlacesAPIAutocomplete\Parameter\LocationInterface;
 use GooglePlacesAPIAutocomplete\Parameter\PlaceType;
 use Fig\Cache\Memory\MemoryPool;
+use GooglePlacesAPIAutocomplete\Response\Response;
 use GoogleSupportedLanguages\Languages\LanguageInterface;
 use GuzzleHttp\Client;
 use Psr\Cache\CacheItemPoolInterface;
@@ -66,7 +67,6 @@ class Request implements RequestInterface {
    *   A cache pool to use for caching responses.
    */
   public function __construct($key, CacheItemPoolInterface $cachePool = NULL) {
-//    components — A grouping of places to which you would like to restrict your results. Currently, you can use components to filter by country. The country must be passed as a two character, ISO 3166-1 Alpha-2 compatible country code. For example: components=country:fr would restrict your results to places within France
     $this->key = $key;
 
     // If a permanent cache was provided, use it as the cache backends.
@@ -82,9 +82,9 @@ class Request implements RequestInterface {
   /**
    * {@inheritdoc}
    */
-  public function query($input, $options = array()) {
+  public function setInput($input) {
     $this->input = $input;
-    $this->options = $options;
+
     return $this;
   }
 
@@ -94,7 +94,7 @@ class Request implements RequestInterface {
   public function execute() {
     // First, attempt to get the data from cache. If this fails, we will query
     // the Places API.
-    if (!$this->result = $this->cacheGet()) {
+    if (!$responseBody = $this->cacheGet()) {
       $client = new Client(array(
         'base_uri' => static::BASE_URL,
       ));
@@ -105,33 +105,14 @@ class Request implements RequestInterface {
         $error_msg = strtr("Request failed with status: @status.", array('@status' => $response->getStatusCode()));
         throw new RequestException($error_msg, 1);
       }
-
-      // Decode the response json.
-      $decoded_response = json_decode($response->getBody()->getContents());
-
-      // If not an object we hit some unknown error.
-      if (!is_object($decoded_response)) {
-        $error_msg = "Unknown error getting data from Google Places API.";
-        throw new RequestException($error_msg, 1);
-      }
-
-      // If status code is not OK or ZERO_RESULTS, we hit a defined Places API error
-      if (!in_array($decoded_response->status, array('OK', 'ZERO_RESULTS'))) {
-        $error_msg = strtr("Google responded with status: @status @error_mesage.", array(
-          '@status' => $decoded_response->status,
-          '@error_message' => isset($decoded_response->error_message) ? $decoded_response->error_message : ''
-        ));
-        throw new RequestException($error_msg, 1);
-      }
-
-      // Set the results.
-      $this->result = $decoded_response;
+      
+      $responseBody = $response->getBody()->getContents();
 
       // Save these to cache for future requests.
-      $this->cacheSet($this->result);
+      $this->cacheSet($responseBody);
     }
 
-    return $this->result;
+    return new Response($responseBody);
   }
 
   /**
@@ -141,34 +122,30 @@ class Request implements RequestInterface {
    *   The cached results, or NULL.
    */
   private function cacheGet() {
-    foreach ($this->cachePool as $cache) {
-      $item = $cache->getItem($this->getCid());
-      $data = $item->get();
-      // If we found a cache value, validate the input is the same (to prevent
-      // an hypotetical situation where 2 input strings have the same hash).
-      if ($item->isHit() && $data['input'] == $this->input ) {
-        return $data['value'];
-      }
+    $item = $this->cachePool->getItem($this->getCid());
+    $data = $item->get();
+    // If we found a cache value, validate the input is the same (to prevent
+    // an hypotetical situation where 2 input strings have the same hash).
+    if ($item->isHit() && $data['input'] == $this->input ) {
+      return $data['value'];
     }
   }
 
   /**
    * Stores a value in the cache.
    *
-   * @param mixed $value
+   * @param mixed $response
    *   The value to be stored.
    */
-  private function cacheSet($value) {
+  private function cacheSet($response) {
     $data = array(
       'input' => $this->input,
-      'value' => $value
+      'response' => $response
     );
 
-    foreach ($this->cachePool as $cache) {
-      $cache_item = $cache->getItem($this->getCid());
-      $cache_item->set($data);
-      $cache->save($cache_item);
-    }
+    $cache_item = $this->cachePool->getItem($this->getCid());
+    $cache_item->set($data);
+    $this->cachePool->save($cache_item);
   }
 
   /**
@@ -178,7 +155,7 @@ class Request implements RequestInterface {
    *   The cid
    */
   private function getCid() {
-    return 'hash.' . md5($this->input);
+    return 'hash.' . md5([$this->input] + $this->options);
   }
 
   /**
@@ -188,14 +165,12 @@ class Request implements RequestInterface {
    *   The uri.
    */
   private function prepareUri() {
-    // Get the options for the request.
-    $options = $this->options;
 
     // Add the key and the input to them.
     $parameters = array(
       'key' => $this->key,
       'input' => $this->input,
-    ) + $options;
+    ) + $this->options;
 
     // Url encode the parameters.
     $processed_parameters = array();
@@ -287,11 +262,11 @@ class Request implements RequestInterface {
   /**
    * Set the language paramenter for the request.
    *
-   * The language code, indicating in which language the results should be
-   * returned, if possible. Searches are also biased to the selected language;
-   * results in the selected language may be given a higher ranking. If language
-   * is not supplied, the Place Autocomplete service will attempt to use the
-   * native language of the domain from which the request is sent.
+   * The language in which the results should be returned, if possible. Searches
+   * are also biased to the selected language; results in the selected language
+   * may be given a higher ranking. If language is not supplied, the Place
+   * Autocomplete service will attempt to use the native language of the domain
+   * from which the request is sent.
    *
    * @param \GoogleSupportedLanguages\Languages\LanguageInterface $language
    * @return $this
@@ -306,10 +281,8 @@ class Request implements RequestInterface {
    * Set the components paramenter for the request.
    *
    * A grouping of places to which you would like to restrict your results.
-   * Currently, you can use components to filter by country. The country must be
-   * passed as a two character, ISO 3166-1 Alpha-2 compatible country code. For
-   * example: components=country:fr would restrict your results to places within
-   * France
+   * Currently, you can use components to filter by country. For example:
+   * components=country:fr would restrict your results to places within France
    *
    * @param \GooglePlacesAPIAutocomplete\Request\ComponentsInterface $components
    * @return $this

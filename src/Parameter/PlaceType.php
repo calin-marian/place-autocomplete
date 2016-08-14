@@ -90,7 +90,7 @@ class PlaceType {
    */
   private function validatePlaceType() {
     if (!in_array($this->placeType, $this->getAllPlaceTypes())) {
-      throw new \UnexpectedValueException("The place type is not one of the supported ones.");
+      throw new \UnexpectedValueException("The place type is not one of the supported ones: " . implode(', ', $this->getAllPlaceTypes()));
     }
   }
 

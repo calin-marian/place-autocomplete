@@ -29,7 +29,7 @@ class Location implements LocationInterface {
    * @param float $longitude
    *
    * @throws \InvalidArgumentException
-   * @throws \UnexpectedValueException
+   * @throws \DomainException
    */
   public function __construct($latitude, $longitude) {
     $this->latitude = $latitude;
@@ -45,18 +45,7 @@ class Location implements LocationInterface {
    * @return string
    */
   public function __toString() {
-    return $this->formatString("@latitude,@longitude", ['@latitude' => $this->latitude, "@longitude" => $this->longitude]);
-  }
-
-  /**
-   * Replace tokens with their values in a string.
-   *
-   * @param string $string
-   * @param array $replacements
-   * @return string
-   */
-  private function formatString($string, $replacements) {
-    return str_replace(array_keys($replacements), array_values($replacements), $string);
+    return strtr("@latitude,@longitude", ['@latitude' => $this->latitude, "@longitude" => $this->longitude]);
   }
 
   /**
@@ -72,7 +61,7 @@ class Location implements LocationInterface {
     $this->latitude = (float) $this->latitude;
 
     if ($this->latitude > 90 || $this->latitude < -90) {
-      throw new \UnexpectedValueException('The latitude must be between -90 and 90');
+      throw new \DomainException('The latitude must be between -90 and 90');
     }
   }
 
@@ -89,7 +78,7 @@ class Location implements LocationInterface {
     $this->longitude = (float) $this->longitude;
 
     if ($this->longitude > 180 || $this->longitude < -180) {
-      throw new \UnexpectedValueException('The longitude must be between -180 and 180');
+      throw new \DomainException('The longitude must be between -180 and 180');
     }
   }
 

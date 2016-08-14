@@ -25,21 +25,10 @@ class Country implements CountryInterface {
   }
 
   function __toString() {
-    return $this->formatString("@parameter:@value", [
+    return strtr("@parameter:@value", [
       '@parameter' => static::PARAMETER_NAME,
       "@value" => strtolower($this->country->getIso3166Alpha2CountryCode())
     ]);
   }
-
-  /**
-   * Replace tokens with their values in a string.
-   *
-   * @param string $string
-   * @param array $replacements
-   * @return string
-   */
-  private function formatString($string, $replacements) {
-    return str_replace(array_keys($replacements), array_values($replacements), $string);
-  }
-
+  
 }

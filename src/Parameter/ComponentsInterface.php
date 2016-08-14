@@ -9,6 +9,15 @@
 namespace GooglePlacesAPIAutocomplete\Parameter;
 
 
+use GooglePlacesAPIAutocomplete\Component\ComponentInterface;
+
 interface ComponentsInterface extends ParameterInterface {
+
+  /**
+   * Add a component to the parameter.
+   * 
+   * @param \GooglePlacesAPIAutocomplete\Component\ComponentInterface $component
+   */
+  public function addComponent(ComponentInterface $component);
 
 }
