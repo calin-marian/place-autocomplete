@@ -1,27 +1,30 @@
 {
-    "name": "dreamproduction/google_places_api",
+    "name": "calin-marian/google-places-api-autocomplete",
     "description": "Php library for getting data from the Google Places API.",
-    "homepage": "https://github.com/dreamproduction/google_places_api",
+    "homepage": "https://github.com/calin-marian/google-places-api-autocomplete",
     "require": {
         "fig/cache-util": "^1.0@dev",
         "guzzlehttp/guzzle": "^6.0",
         "calin-marian/google-supported-languages": "^1.0",
         "markenwerk/iso3166-country-information": "^3.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
     "license": "GPL-2.0+",
     "authors": [
         {
             "name": "Calin Marian",
-            "email": "calin.marian@dreamproduction.com"
+            "email": "calin.djuricin@gmail.com"
         }
     ],
     "support": {
-        "issues": "https://github.com/dreamproduction/google_places_api/issues",
-        "source": "https://github.com/dreamproduction/google_places_api"
+        "issues": "https://github.com/calin-marian/google-places-api-autocomplete/issues",
+        "source": "https://github.com/calin-marian/google-places-api-autocomplete"
     },
     "autoload": {
         "psr-4": {
-            "Dreamproduction\\GooglePlacesAPI\\": "src/"
+            "GooglePlacesAPIAutocomplete\\": "src/"
         }
     },
     "minimum-stability": "dev"
