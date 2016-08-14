@@ -1,16 +1,17 @@
 <?php
 
-namespace Dreamproduction\GooglePlacesAPI\Request;
+namespace GooglePlacesAPIAutocomplete\Request;
 
 /**
  * @file
- * Contains Dreamproduction\GooglePlacesAPI\Request\Request.
+ * Contains GooglePlacesAPIAutocomplete\Request\Request.
  */
 
-use Dreamproduction\GooglePlacesAPI\Exception\RequestException;
-use Dreamproduction\GooglePlacesAPI\Parameter\Location;
-use Dreamproduction\GooglePlacesAPI\Parameter\PlaceTypes;
+use GooglePlacesAPIAutocomplete\Exception\RequestException;
+use GooglePlacesAPIAutocomplete\Parameter\LocationInterface;
+use GooglePlacesAPIAutocomplete\Parameter\PlaceType;
 use Fig\Cache\Memory\MemoryPool;
+use GoogleSupportedLanguages\Languages\LanguageInterface;
 use GuzzleHttp\Client;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -65,7 +66,6 @@ class Request implements RequestInterface {
    *   A cache pool to use for caching responses.
    */
   public function __construct($key, CacheItemPoolInterface $cachePool = NULL) {
-//    language — The language code, indicating in which language the results should be returned, if possible. Searches are also biased to the selected language; results in the selected language may be given a higher ranking. See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place Autocomplete service will attempt to use the native language of the domain from which the request is sent.
 //    components — A grouping of places to which you would like to restrict your results. Currently, you can use components to filter by country. The country must be passed as a two character, ISO 3166-1 Alpha-2 compatible country code. For example: components=country:fr would restrict your results to places within France
     $this->key = $key;
 
@@ -210,23 +210,11 @@ class Request implements RequestInterface {
   /**
    * Set the types parameter for the request.
    *
-   * @param string $placeType
+   * @param \GooglePlacesAPIAutocomplete\Parameter\PlaceType $placeType
    * @return $this
-   *
-   * @throws \InvalidArgumentException
-   *
-   * @see PlaceTypes
    */
-  public function setTypes($placeType) {
-    // Validate the type is one of the supported ones.
-    if (!in_array($placeType, PlaceTypes::getAllPlaceTypes())) {
-      throw new \InvalidArgumentException("The place type is not one of the supported ones.");
-    }
-
-    // If the type is ALL, that is achieved by not passing the parameter.
-    if ($placeType != PlaceTypes::ALL) {
-      $this->options['types'] = $placeType;
-    }
+  public function setTypes(PlaceType $placeType) {
+    $this->options['types'] = $placeType;
 
     return $this;
   }
@@ -264,11 +252,11 @@ class Request implements RequestInterface {
    *
    * The point around which you wish to retrieve place information.
    *
-   * @param \Dreamproduction\GooglePlacesAPI\Parameter\Location $location
+   * @param \GooglePlacesAPIAutocomplete\Parameter\LocationInterface $location
    * @return $this
    */
-  public function setLocation(Location $location) {
-    $this->options['location'] = (string) $location;
+  public function setLocation(LocationInterface $location) {
+    $this->options['location'] = $location;
 
     return $this;
   }
@@ -296,5 +284,40 @@ class Request implements RequestInterface {
     return $this;
   }
 
-  
+  /**
+   * Set the language paramenter for the request.
+   *
+   * The language code, indicating in which language the results should be
+   * returned, if possible. Searches are also biased to the selected language;
+   * results in the selected language may be given a higher ranking. If language
+   * is not supplied, the Place Autocomplete service will attempt to use the
+   * native language of the domain from which the request is sent.
+   *
+   * @param \GoogleSupportedLanguages\Languages\LanguageInterface $language
+   * @return $this
+   */
+  public function setLanguage(LanguageInterface $language) {
+    $this->options['language'] = $language;
+
+    return $this;
+  }
+
+  /**
+   * Set the components paramenter for the request.
+   *
+   * A grouping of places to which you would like to restrict your results.
+   * Currently, you can use components to filter by country. The country must be
+   * passed as a two character, ISO 3166-1 Alpha-2 compatible country code. For
+   * example: components=country:fr would restrict your results to places within
+   * France
+   *
+   * @param \GooglePlacesAPIAutocomplete\Request\ComponentsInterface $components
+   * @return $this
+   */
+  public function setComponents(ComponentsInterface $components) {
+    $this->options['components'] = $components;
+
+    return $this;
+  }
+
 }

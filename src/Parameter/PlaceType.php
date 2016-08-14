@@ -1,18 +1,18 @@
 <?php
 
-namespace Dreamproduction\GooglePlacesAPI\Parameter;
+namespace GooglePlacesAPIAutocomplete\Parameter;
 
 /**
  * @file
- * Contains Dreamproduction\GooglePlacesAPI\PlaceTypes.
+ * Contains GooglePlacesAPIAutocomplete\Parameter\PlaceType.
  */
 
-class PlaceTypes {
+class PlaceType {
 
   /**
    * Intructs the Place Autocomplete service to return all types of places.
    */
-  CONST ALL = null;
+  CONST ALL = "geocode,establishment";
 
   /**
    * Instructs the Place Autocomplete service to return only geocoding results,
@@ -48,13 +48,33 @@ class PlaceTypes {
    * administrative_area_level_3.
    */
   CONST CITIES = "(cities)";
+  
+  /**
+   * @var string
+   */
+  private $placeType;
+
+  /**
+   * PlaceType constructor.
+   * 
+   * @param string $placeType
+   * @throws \UnexpectedValueException
+   */
+  public function __construct($placeType) {
+    $this->placeType = $placeType;
+    $this->validatePlaceType();
+  }
+
+  public function __toString() {
+    return $this->placeType;
+  }
 
   /**
    * Get a list of all the place types.
    *
    * @return string[]
    */
-  static function getAllPlaceTypes() {
+  private function getAllPlaceTypes() {
     return [
       static::ALL,
       static::GEOCODE,
@@ -63,6 +83,15 @@ class PlaceTypes {
       static::REGIONS,
       static::CITIES
     ];
+  }
+
+  /**
+   * Validate the place type.
+   */
+  private function validatePlaceType() {
+    if (!in_array($this->placeType, $this->getAllPlaceTypes())) {
+      throw new \UnexpectedValueException("The place type is not one of the supported ones.");
+    }
   }
 
 }

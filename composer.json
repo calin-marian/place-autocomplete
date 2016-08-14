@@ -5,7 +5,8 @@
     "require": {
         "fig/cache-util": "^1.0@dev",
         "guzzlehttp/guzzle": "^6.0",
-        "calin-marian/google-supported-languages": "^1.0"
+        "calin-marian/google-supported-languages": "^1.0",
+        "markenwerk/iso3166-country-information": "^3.0"
     },
     "license": "GPL-2.0+",
     "authors": [

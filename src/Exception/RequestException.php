@@ -1,6 +1,6 @@
 <?php
 
-namespace Dreamproduction\GooglePlacesAPI\Exception;
+namespace GooglePlacesAPIAutocomplete\Exception;
 
 /**
  * @file

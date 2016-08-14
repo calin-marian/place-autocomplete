@@ -1,13 +1,13 @@
 <?php
-
-namespace Dreamproduction\GooglePlacesAPI\Parameter;
+namespace GooglePlacesAPIAutocomplete\Parameter;
 
 /**
  * @file
- * Contains Dreamproduction\GooglePlacesAPI\Location.
+ * Contains GooglePlacesAPIAutocomplete\Parameter\Location.
  */
 
-class Location {
+class Location implements LocationInterface {
+  
   /**
    * The latitude.
    *
@@ -27,17 +27,16 @@ class Location {
    * Location constructor.
    * @param float $latitude
    * @param float $longitude
+   *
+   * @throws \InvalidArgumentException
+   * @throws \UnexpectedValueException
    */
   public function __construct($latitude, $longitude) {
-    if (!is_numeric($latitude)) {
-      throw new \InvalidArgumentException('The latitude has to be numeric');
-    }
-
-    if (!is_numeric($longitude)) {
-      throw new \InvalidArgumentException('The longitude has to be numeric');
-    }
     $this->latitude = $latitude;
+    $this->validateLatitude();
+
     $this->longitude = $longitude;
+    $this->validateLongitude();
   }
 
   /**
@@ -59,4 +58,39 @@ class Location {
   private function formatString($string, $replacements) {
     return str_replace(array_keys($replacements), array_values($replacements), $string);
   }
+
+  /**
+   * Validate latitude
+   */
+  private function validateLatitude() {
+    if (!is_numeric($this->latitude)) {
+      throw new \InvalidArgumentException('The latitude has to be numeric');
+    }
+
+    // We need to typecast the value to float, because we test for numeric above
+    // and that means also strings that contain numbers.
+    $this->latitude = (float) $this->latitude;
+
+    if ($this->latitude > 90 || $this->latitude < -90) {
+      throw new \UnexpectedValueException('The latitude must be between -90 and 90');
+    }
+  }
+
+  /**
+   * Validate longitude
+   */
+  private function validateLongitude() {
+    if (!is_numeric($this->longitude)) {
+      throw new \InvalidArgumentException('The longitude has to be numeric');
+    }
+
+    // We need to typecast the value to float, because we test for numeric above
+    // and that means also strings that contain numbers.
+    $this->longitude = (float) $this->longitude;
+
+    if ($this->longitude > 180 || $this->longitude < -180) {
+      throw new \UnexpectedValueException('The longitude must be between -180 and 180');
+    }
+  }
+
 }
