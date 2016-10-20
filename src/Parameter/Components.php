@@ -1,7 +1,6 @@
 <?php
 namespace GooglePlacesAPIAutocomplete\Parameter;
 
-
 use GooglePlacesAPIAutocomplete\Component\ComponentInterface;
 
 class Components implements ComponentsInterface {

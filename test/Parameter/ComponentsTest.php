@@ -16,7 +16,7 @@ class ComponentsTest extends TestCase {
    */
   public function testToString() {
     $components = new Components();
-    // TODO: mock country components.
+
     $country = Iso3166CountryInformation::getByIso3166Alpha2('FR');
     $countryComponent = new Country($country);
     $components->addComponent($countryComponent);
