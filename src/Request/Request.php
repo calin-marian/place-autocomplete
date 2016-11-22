@@ -9,6 +9,7 @@ namespace GooglePlaceAutocomplete\Request;
 
 use GooglePlaceAutocomplete\Component\ComponentInterface;
 use GooglePlaceAutocomplete\Exception\RequestException;
+use GooglePlaceAutocomplete\Parameter\Language;
 use GooglePlaceAutocomplete\Parameter\Location;
 use GooglePlaceAutocomplete\Parameter\LocationInterface;
 use GooglePlaceAutocomplete\Parameter\PlaceType;
@@ -226,7 +227,7 @@ class Request implements RequestInterface {
   /**
    * {@inheritdoc}
    */
-  public function setLanguage(LanguageInterface $language) {
+  public function setLanguage(Language $language) {
     $this->options['language'] = $language;
 
     return $this;

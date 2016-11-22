@@ -3,9 +3,9 @@
 namespace GooglePlaceAutocomplete\Request;
 
 use GooglePlaceAutocomplete\Component\ComponentInterface;
+use GooglePlaceAutocomplete\Parameter\Language;
 use GooglePlaceAutocomplete\Parameter\Location;
 use GooglePlaceAutocomplete\Parameter\PlaceType;
-use GoogleSupportedLanguages\Languages\LanguageInterface;
 
 /**
  * Contains GooglePlaceAutocomplete\Request\RequestInterface.
@@ -89,10 +89,10 @@ interface RequestInterface {
    * Autocomplete service will attempt to use the native language of the domain
    * from which the request is sent.
    *
-   * @param \GoogleSupportedLanguages\Languages\LanguageInterface $language
+   * @param \GooglePlaceAutocomplete\Parameter\Language $language
    * @return $this
    */
-  public function setLanguage(LanguageInterface $language);
+  public function setLanguage(Language $language);
 
   /**
    * Set the components paramenter for the request.

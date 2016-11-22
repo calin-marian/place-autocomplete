@@ -6,7 +6,7 @@ namespace GooglePlaceAutocomplete\Parameter;
  * Contains GooglePlaceAutocomplete\Parameter\Location.
  */
 
-class Location {
+class Location implements ParameterInterface {
   
   /**
    * The latitude.

@@ -7,7 +7,7 @@ namespace GooglePlaceAutocomplete\Parameter;
  * Contains GooglePlaceAutocomplete\Parameter\PlaceType.
  */
 
-class PlaceType {
+class PlaceType implements ParameterInterface {
 
   /**
    * Intructs the Place Autocomplete service to return all types of places.
