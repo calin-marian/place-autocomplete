@@ -1,10 +1,10 @@
 <?php
 
-use GooglePlacesAPIAutocomplete\Prediction\MatchedSubstring;
+use GooglePlaceAutocomplete\Prediction\MatchedSubstring;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Prediction\MatchedSubstring
+ * @coversDefaultClass \GooglePlaceAutocomplete\Prediction\MatchedSubstring
  */
 class MatchedSubstringTest extends TestCase {
 

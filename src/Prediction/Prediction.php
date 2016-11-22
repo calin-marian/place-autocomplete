@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Prediction;
+namespace GooglePlaceAutocomplete\Prediction;
 
 
 class Prediction {
@@ -72,7 +72,7 @@ class Prediction {
   }
 
   /**
-   * @return \GooglePlacesAPIAutocomplete\Prediction\MatchedSubstring[]
+   * @return \GooglePlaceAutocomplete\Prediction\MatchedSubstring[]
    */
   public function getMatchedSubstrings() {
     return $this->matched_substrings;
@@ -93,7 +93,7 @@ class Prediction {
   }
 
   /**
-   * @return \GooglePlacesAPIAutocomplete\Prediction\Term[]
+   * @return \GooglePlaceAutocomplete\Prediction\Term[]
    */
   public function getTerms() {
     return $this->terms;

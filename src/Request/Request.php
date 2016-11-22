@@ -1,17 +1,17 @@
 <?php
 
-namespace GooglePlacesAPIAutocomplete\Request;
+namespace GooglePlaceAutocomplete\Request;
 
 /**
  * @file
- * Contains GooglePlacesAPIAutocomplete\Request\Request.
+ * Contains GooglePlaceAutocomplete\Request\Request.
  */
 
-use GooglePlacesAPIAutocomplete\Exception\RequestException;
-use GooglePlacesAPIAutocomplete\Parameter\LocationInterface;
-use GooglePlacesAPIAutocomplete\Parameter\PlaceType;
+use GooglePlaceAutocomplete\Exception\RequestException;
+use GooglePlaceAutocomplete\Parameter\LocationInterface;
+use GooglePlaceAutocomplete\Parameter\PlaceType;
 use Fig\Cache\Memory\MemoryPool;
-use GooglePlacesAPIAutocomplete\Response\Response;
+use GooglePlaceAutocomplete\Response\Response;
 use GoogleSupportedLanguages\Languages\LanguageInterface;
 use GuzzleHttp\Client;
 use Psr\Cache\CacheItemPoolInterface;
@@ -185,7 +185,7 @@ class Request implements RequestInterface {
   /**
    * Set the types parameter for the request.
    *
-   * @param \GooglePlacesAPIAutocomplete\Parameter\PlaceType $placeType
+   * @param \GooglePlaceAutocomplete\Parameter\PlaceType $placeType
    * @return $this
    */
   public function setTypes(PlaceType $placeType) {
@@ -227,7 +227,7 @@ class Request implements RequestInterface {
    *
    * The point around which you wish to retrieve place information.
    *
-   * @param \GooglePlacesAPIAutocomplete\Parameter\LocationInterface $location
+   * @param \GooglePlaceAutocomplete\Parameter\LocationInterface $location
    * @return $this
    */
   public function setLocation(LocationInterface $location) {
@@ -284,7 +284,7 @@ class Request implements RequestInterface {
    * Currently, you can use components to filter by country. For example:
    * components=country:fr would restrict your results to places within France
    *
-   * @param \GooglePlacesAPIAutocomplete\Request\ComponentsInterface $components
+   * @param \GooglePlaceAutocomplete\Request\ComponentsInterface $components
    * @return $this
    */
   public function setComponents(ComponentsInterface $components) {

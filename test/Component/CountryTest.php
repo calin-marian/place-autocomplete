@@ -1,11 +1,11 @@
 <?php
 
-use GooglePlacesAPIAutocomplete\Component\Country;
+use GooglePlaceAutocomplete\Component\Country;
 use Markenwerk\Iso3166Country\Iso3166CountryInformation;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Component\Country
+ * @coversDefaultClass \GooglePlaceAutocomplete\Component\Country
  */
 class CountryTest extends TestCase {
 

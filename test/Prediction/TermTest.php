@@ -1,10 +1,10 @@
 <?php
 
-use GooglePlacesAPIAutocomplete\Prediction\Term;
+use GooglePlaceAutocomplete\Prediction\Term;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Prediction\Term
+ * @coversDefaultClass \GooglePlaceAutocomplete\Prediction\Term
  */
 class TermTest extends TestCase {
 

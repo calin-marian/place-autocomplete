@@ -1,6 +1,6 @@
 <?php
 
-namespace GooglePlacesAPIAutocomplete\Exception;
+namespace GooglePlaceAutocomplete\Exception;
 
 /**
  * @file

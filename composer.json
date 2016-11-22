@@ -1,7 +1,7 @@
 {
-    "name": "calin-marian/google-places-api-autocomplete",
-    "description": "Php library for getting data from the Google Places API.",
-    "homepage": "https://github.com/calin-marian/google-places-api-autocomplete",
+    "name": "calin-marian/place-autocomplete",
+    "description": "Php library for getting data from Google Place Autocomplete.",
+    "homepage": "https://github.com/calin-marian/place-autocomplete",
     "require": {
         "fig/cache-util": "^1.0@dev",
         "guzzlehttp/guzzle": "^6.0",
@@ -19,12 +19,12 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/calin-marian/google-places-api-autocomplete/issues",
-        "source": "https://github.com/calin-marian/google-places-api-autocomplete"
+        "issues": "https://github.com/calin-marian/place-autocomplete/issues",
+        "source": "https://github.com/calin-marian/place-autocomplete"
     },
     "autoload": {
         "psr-4": {
-            "GooglePlacesAPIAutocomplete\\": "src/"
+            "GooglePlaceAutocomplete\\": "src/"
         }
     },
     "minimum-stability": "dev"

@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Response;
+namespace GooglePlaceAutocomplete\Response;
 
 class Response implements ResponseInterface, \Iterator{
 
@@ -35,7 +35,7 @@ class Response implements ResponseInterface, \Iterator{
    * Response constructor.
    *
    * @param $response
-   * @throws \GooglePlacesAPIAutocomplete\Response\RequestException
+   * @throws \GooglePlaceAutocomplete\Response\RequestException
    */
   public function __construct($response) {
     $decoded_response = json_decode($response);

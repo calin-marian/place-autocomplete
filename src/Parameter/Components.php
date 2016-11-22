@@ -1,7 +1,7 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Parameter;
+namespace GooglePlaceAutocomplete\Parameter;
 
-use GooglePlacesAPIAutocomplete\Component\ComponentInterface;
+use GooglePlaceAutocomplete\Component\ComponentInterface;
 
 class Components implements ComponentsInterface {
 
@@ -13,7 +13,7 @@ class Components implements ComponentsInterface {
   /**
    * Add a component to the parameter.
    *
-   * @param \GooglePlacesAPIAutocomplete\Component\ComponentInterface $component
+   * @param \GooglePlaceAutocomplete\Component\ComponentInterface $component
    */
   public function addComponent(ComponentInterface $component) {
     $this->components []= $component;

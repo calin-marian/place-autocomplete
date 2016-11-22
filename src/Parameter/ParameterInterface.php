@@ -1,9 +1,9 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Parameter;
+namespace GooglePlaceAutocomplete\Parameter;
 
 /**
  * @file
- * Contains GooglePlacesAPIAutocomplete\Parameter\ParameterInterface.
+ * Contains GooglePlaceAutocomplete\Parameter\ParameterInterface.
  */
 
 interface ParameterInterface {

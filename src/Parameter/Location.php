@@ -1,9 +1,9 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Parameter;
+namespace GooglePlaceAutocomplete\Parameter;
 
 /**
  * @file
- * Contains GooglePlacesAPIAutocomplete\Parameter\Location.
+ * Contains GooglePlaceAutocomplete\Parameter\Location.
  */
 
 class Location {

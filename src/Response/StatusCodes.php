@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Response;
+namespace GooglePlaceAutocomplete\Response;
 
 class StatusCodes {
 

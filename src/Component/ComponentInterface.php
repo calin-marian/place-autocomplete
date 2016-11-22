@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Component;
+namespace GooglePlaceAutocomplete\Component;
 
 interface ComponentInterface {
 

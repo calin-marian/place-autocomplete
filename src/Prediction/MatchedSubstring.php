@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Prediction;
+namespace GooglePlaceAutocomplete\Prediction;
 
 
 class MatchedSubstring {

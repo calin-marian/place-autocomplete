@@ -1,10 +1,10 @@
 <?php
 
-namespace GooglePlacesAPIAutocomplete\Parameter;
+namespace GooglePlaceAutocomplete\Parameter;
 
 /**
  * @file
- * Contains GooglePlacesAPIAutocomplete\Parameter\PlaceType.
+ * Contains GooglePlaceAutocomplete\Parameter\PlaceType.
  */
 
 class PlaceType {

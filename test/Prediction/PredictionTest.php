@@ -1,13 +1,13 @@
 <?php
 
-use GooglePlacesAPIAutocomplete\Parameter\PlaceType;
-use GooglePlacesAPIAutocomplete\Prediction\MatchedSubstring;
-use GooglePlacesAPIAutocomplete\Prediction\Prediction;
-use GooglePlacesAPIAutocomplete\Prediction\Term;
+use GooglePlaceAutocomplete\Parameter\PlaceType;
+use GooglePlaceAutocomplete\Prediction\MatchedSubstring;
+use GooglePlaceAutocomplete\Prediction\Prediction;
+use GooglePlaceAutocomplete\Prediction\Term;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Prediction\Prediction
+ * @coversDefaultClass \GooglePlaceAutocomplete\Prediction\Prediction
  */
 class PredictionTest extends TestCase {
 

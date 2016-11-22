@@ -1,5 +1,5 @@
 <?php
-namespace GooglePlacesAPIAutocomplete\Component;
+namespace GooglePlaceAutocomplete\Component;
 
 use Markenwerk\Iso3166Country\Iso3166Country;
 

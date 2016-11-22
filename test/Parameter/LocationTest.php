@@ -1,10 +1,10 @@
 <?php
 
-use GooglePlacesAPIAutocomplete\Parameter\Location;
+use GooglePlaceAutocomplete\Parameter\Location;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Paramter\Location
+ * @coversDefaultClass \GooglePlaceAutocomplete\Paramter\Location
  */
 class LocationTest extends TestCase {
 
