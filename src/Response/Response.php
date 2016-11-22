@@ -1,6 +1,9 @@
 <?php
 namespace GooglePlaceAutocomplete\Response;
 
+use GooglePlaceAutocomplete\Exception\RequestException;
+use GooglePlaceAutocomplete\Prediction\Prediction;
+
 class Response implements ResponseInterface, \Iterator{
 
   /**
@@ -35,7 +38,7 @@ class Response implements ResponseInterface, \Iterator{
    * Response constructor.
    *
    * @param $response
-   * @throws \GooglePlaceAutocomplete\Response\RequestException
+   * @throws \GooglePlaceAutocomplete\Exception\RequestException
    */
   public function __construct($response) {
     $decoded_response = json_decode($response);
