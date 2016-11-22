@@ -1,0 +1,31 @@
+{
+  "description" : "Paris Street, Carlton, New South Wales, Australia",
+  "id" : "bee539812eeda477dad282bcc8310758fb31d64d",
+  "matched_substrings" : [
+    {
+      "length" : 5,
+      "offset" : 0
+    }
+  ],
+  "place_id" : "ChIJCfeffMi5EmsRp7ykjcnb3VY",
+  "reference" : "CkQ1AAAAAERlxMXkaNPLDxUJFLm4xkzX_h8I49HvGPvmtZjlYSVWp9yUhQSwfsdveHV0yhzYki3nguTBTVX2NzmJDukq9RIQNcoFTuz642b4LIzmLgcr5RoUrZhuNqnFHegHsAjtoUUjmhy4_rA",
+  "terms" : [
+    {
+      "offset" : 0,
+      "value" : "Paris Street"
+    },
+    {
+      "offset" : 14,
+      "value" : "Carlton"
+    },
+    {
+      "offset" : 23,
+      "value" : "New South Wales"
+    },
+    {
+      "offset" : 40,
+      "value" : "Australia"
+    }
+  ],
+  "types" : [ "route", "geocode" ]
+}

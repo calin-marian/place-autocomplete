@@ -106,5 +106,4 @@ class Prediction {
     return $this->types;
   }
   
-  
 }

@@ -6,7 +6,7 @@ namespace GooglePlacesAPIAutocomplete\Parameter;
  * Contains GooglePlacesAPIAutocomplete\Parameter\Location.
  */
 
-class Location implements LocationInterface {
+class Location {
   
   /**
    * The latitude.
@@ -29,7 +29,7 @@ class Location implements LocationInterface {
    * @param float $longitude
    *
    * @throws \InvalidArgumentException
-   * @throws \DomainException
+   * @throws \UnexpectedValueException
    */
   public function __construct($latitude, $longitude) {
     $this->latitude = $latitude;

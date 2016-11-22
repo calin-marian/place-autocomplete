@@ -4,7 +4,7 @@ use GooglePlacesAPIAutocomplete\Parameter\PlaceType;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \GooglePlacesAPIAutocomplete\Paramter\Location
+ * @coversDefaultClass \GooglePlacesAPIAutocomplete\Paramter\PlaceType
  */
 class PlaceTypeTest extends TestCase {
 
@@ -21,6 +21,5 @@ class PlaceTypeTest extends TestCase {
     $this->expectException(UnexpectedValueException::class);
     $placeType = new PlaceType('invalid');
   }
-
 
 }
