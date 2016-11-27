@@ -174,7 +174,7 @@ class Request implements RequestInterface {
     foreach ($parameters as $name => $value) {
       $processed_parameters[$name] = (string) $value;
     }
-    return $processed_parameters;
+    return ['query' => $processed_parameters];
   }
 
   /**
