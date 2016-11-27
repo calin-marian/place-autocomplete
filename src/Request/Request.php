@@ -7,15 +7,14 @@ namespace GooglePlaceAutocomplete\Request;
  * Contains GooglePlaceAutocomplete\Request\Request.
  */
 
-use GooglePlaceAutocomplete\Component\ComponentInterface;
 use GooglePlaceAutocomplete\Exception\RequestException;
+use GooglePlaceAutocomplete\Parameter\ComponentsInterface;
 use GooglePlaceAutocomplete\Parameter\Language;
 use GooglePlaceAutocomplete\Parameter\Location;
 use GooglePlaceAutocomplete\Parameter\LocationInterface;
 use GooglePlaceAutocomplete\Parameter\PlaceType;
 use Fig\Cache\Memory\MemoryPool;
 use GooglePlaceAutocomplete\Response\Response;
-use GoogleSupportedLanguages\Languages\LanguageInterface;
 use GuzzleHttp\Client;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -95,7 +94,7 @@ class Request implements RequestInterface {
         'base_uri' => static::BASE_URL,
       ));
 
-      $response = $client->get($this->prepareUri());
+      $response = $client->get($this->prepareUri(), $this->prepareOptions());
 
       if ($response->getStatusCode() !== 200) {
         $error_msg = strtr("Request failed with status: @status.", array('@status' => $response->getStatusCode()));
@@ -161,21 +160,21 @@ class Request implements RequestInterface {
    *   The uri.
    */
   private function prepareUri() {
+    return 'json';
+  }
 
-    // Add the key and the input to them.
-    $parameters = array(
+  private function prepareOptions() {
+    // Add the key and the input to options.
+    $parameters = [
       'key' => $this->key,
       'input' => $this->input,
-    ) + $this->options;
+    ] + $this->options;
 
-    // Url encode the parameters.
-    $processed_parameters = array();
+    $processed_parameters = [];
     foreach ($parameters as $name => $value) {
-      $processed_parameters[] = urlencode($name) . '=' . urlencode($value);
+      $processed_parameters[$name] = (string) $value;
     }
-
-    // Add the parameters to the endpoint and return them.
-    return 'json?' . implode('&', $processed_parameters);
+    return $processed_parameters;
   }
 
   /**
@@ -236,7 +235,7 @@ class Request implements RequestInterface {
   /**
    * {@inheritdoc}
    */
-  public function setComponents(ComponentInterface $components) {
+  public function setComponents(ComponentsInterface $components) {
     $this->options['components'] = $components;
 
     return $this;

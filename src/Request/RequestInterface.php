@@ -2,7 +2,7 @@
 
 namespace GooglePlaceAutocomplete\Request;
 
-use GooglePlaceAutocomplete\Component\ComponentInterface;
+use GooglePlaceAutocomplete\Parameter\ComponentsInterface;
 use GooglePlaceAutocomplete\Parameter\Language;
 use GooglePlaceAutocomplete\Parameter\Location;
 use GooglePlaceAutocomplete\Parameter\PlaceType;
@@ -101,9 +101,9 @@ interface RequestInterface {
    * Currently, you can use components to filter by country. For example:
    * components=country:fr would restrict your results to places within France
    *
-   * @param \GooglePlaceAutocomplete\Component\ComponentInterface $components
+   * @param \GooglePlaceAutocomplete\Parameter\ComponentsInterface $components
    * @return $this
    */
-  public function setComponents(ComponentInterface $components);
+  public function setComponents(ComponentsInterface $components);
 
 }
